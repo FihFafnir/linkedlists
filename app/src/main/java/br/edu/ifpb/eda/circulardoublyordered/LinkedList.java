@@ -1,16 +1,16 @@
 package br.edu.ifpb.eda.circulardoublyordered;
 
-public class LinkedList {
-    private Node root;
+public class LinkedList<T extends Comparable<T>> {
+    private Node<T> root;
     private int size;
 
     public LinkedList() {
-        this.root = new Node();
+        this.root = new Node<T>();
         this.size = 0;
     }
 
-    private Node getNode(int index) {
-        Node current;
+    private Node<T> getNode(int index) {
+        Node<T> current;
 
         if (index < 0 || index >= size)
             return null;
@@ -41,21 +41,21 @@ public class LinkedList {
         this.size = 0;
     }
 
-    public void add(Integer element) {
+    public void add(T element) {
         this.size++;
-        Node current = this.root.next;
+        Node<T> current = this.root.next;
 
-        while (current.value != null && current.value < element)
+        while (current.value != null && current.value.compareTo(element) == -1)
             current = current.next;
 
-        new Node(element, current.previous, current);
+        new Node<T>(element, current.previous, current);
     }
 
-    public Integer get(int index) {
+    public T get(int index) {
         return getNode(index).value;
     }
 
-    private boolean remove(Node node) {
+    private boolean remove(Node<T> node) {
         if (isEmpty() || node == null)
             return false;
         this.size--;
@@ -76,7 +76,7 @@ public class LinkedList {
     public String toString() {
         StringBuilder string = new StringBuilder().append("[");
 
-        for (Node current = this.root.next; current != this.root; current = current.next)
+        for (Node<T> current = this.root.next; current != this.root; current = current.next)
             string.append(current.value.toString()).append(", ");
 
         return (isEmpty() ? string.append("]") : string.replace(string.length() - 2, string.length(), "]")).toString();

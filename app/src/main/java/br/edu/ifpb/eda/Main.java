@@ -4,7 +4,8 @@ import br.edu.ifpb.eda.circulardoublyordered.LinkedList;
 
 public class Main {
     public static void main(String[] args) {
-        LinkedList ll = new LinkedList();
+
+        LinkedList<Integer> ll = new LinkedList<Integer>();
 
         ll.add(8);
         ll.add(22);

@@ -1,9 +1,9 @@
 package br.edu.ifpb.eda.circulardoublyordered;
 
-public class Node {
-    protected Integer value;
-    protected Node next;
-    protected Node previous;
+public class Node<T> {
+    protected T value;
+    protected Node<T> next;
+    protected Node<T> previous;
 
     protected Node() {
         this.value = null;
@@ -11,13 +11,13 @@ public class Node {
         this.next = this;
     }
 
-    protected Node(Integer value) {
+    protected Node(T value) {
         this.value = value;
         this.previous = this;
         this.next = this;
     }
 
-    protected Node(Integer value, Node previous, Node next) {
+    protected Node(T value, Node<T> previous, Node<T> next) {
         this.value = value;
         this.previous = previous;
         this.next = next;
