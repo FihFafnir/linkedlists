@@ -73,6 +73,7 @@ public class LinkedList<T extends Comparable<T>> {
         return remove(this.root.next);
     }
 
+    @Override
     public String toString() {
         StringBuilder string = new StringBuilder().append("[");
 
@@ -80,5 +81,25 @@ public class LinkedList<T extends Comparable<T>> {
             string.append(current.value.toString()).append(", ");
 
         return (isEmpty() ? string.append("]") : string.replace(string.length() - 2, string.length(), "]")).toString();
+    }
+
+    public void adicionar(T elemento) {
+        add(elemento);
+    }
+
+    public boolean remover(int index) {
+        return remove(index);
+    }
+
+    public boolean remover() {
+        return remove();
+    }
+
+    public Node<T> getNodo(int index) {
+        return getNode(index);
+    }
+
+    public int tamanho() {
+        return size();
     }
 }
