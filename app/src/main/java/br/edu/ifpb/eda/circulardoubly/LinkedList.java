@@ -11,14 +11,6 @@ public class LinkedList<T> implements ILinkedList<T> {
         this.size = 0;
     }
 
-    private Node<T> getNode(int index) throws IndexOutOfBoundsException {
-        if (index < 0 || index >= size)
-            throw new IndexOutOfBoundsException();
-        if (index < (size >> 1))
-            return getNode(index, 0, root.next);
-        return getNode(index, size - 1, root.previous);
-    }
-
     private Node<T> getNode(int index, int indexBegin, Node<T> begin) {
         Node<T> current = begin;
         for (int currentIndex = indexBegin; currentIndex < index; currentIndex++)
@@ -26,6 +18,14 @@ public class LinkedList<T> implements ILinkedList<T> {
         for (int currentIndex = indexBegin; currentIndex > index; currentIndex--)
             current = current.previous;
         return current;
+    }
+
+    private Node<T> getNode(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= size)
+            throw new IndexOutOfBoundsException();
+        if (index < (size >> 1))
+            return getNode(index, 0, root.next);
+        return getNode(index, size - 1, root.previous);
     }
 
     @Override

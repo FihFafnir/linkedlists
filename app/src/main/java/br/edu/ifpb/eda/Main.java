@@ -18,8 +18,8 @@ public class Main {
         ll.addLast(9);
         ll.addLast(10);
         System.out.println(ll.toString());
-        System.out.println(ll.get(1));
-        System.out.println(ll.get(8));
+        System.out.println(ll.get(0));
+        System.out.println(ll.get(9));
         // ll.remove(0);
         // ll.remove(9);
         System.out.println(ll.toString());
