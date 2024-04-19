@@ -9,23 +9,23 @@ public class LinkedList<T extends Comparable<T>> {
         this.size = 0;
     }
 
-    private Node<T> getNode(int index) {
-        Node<T> current;
+    private Node<T> getNode(int index, int beginIndex, Node<T> begin) {
+        Node<T> current = begin;
+        for (int currentIndex = beginIndex; currentIndex < index; currentIndex++)
+            current = current.next;
+        for (int currentIndex = beginIndex; currentIndex > index; currentIndex--)
+            current = current.previous;
+        return current;
+    }
 
+    private Node<T> getNode(int index, int beginIndex) {
+        return getNode(index, beginIndex, beginIndex < index ? root.next : root.previous);
+    }
+
+    private Node<T> getNode(int index) {
         if (index < 0 || index >= size)
             return null;
-
-        if (index < (size >> 1)) {
-            current = this.root.next;
-            for (int count = 0; count < index; count++)
-                current = current.next;
-        } else {
-            current = this.root.previous;
-            for (int count = size; count > index; count--)
-                current = current.previous;
-        }
-
-        return current;
+        return getNode(index, index < (size >> 1) ? 0 : size);
     }
 
     public boolean isEmpty() {

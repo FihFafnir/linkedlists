@@ -12,21 +12,21 @@ public class LinkedList<T> implements ILinkedList<T> {
     }
 
     private Node<T> getNode(int index) throws IndexOutOfBoundsException {
-        Node<T> current;
-
         if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException();
+        return getNode(index, (index < (size >> 1)) ? 0 : size);
+    }
 
-        if (index < (size >> 1)) {
-            current = this.root.next;
-            for (int count = 0; count < index; count++)
-                current = current.next;
-        } else {
-            current = this.root.previous;
-            for (int count = size; count > index; count--)
-                current = current.previous;
-        }
+    private Node<T> getNode(int index, int indexBegin) {
+        return getNode(index, indexBegin, index > indexBegin ? root.next : root.previous);
+    }
 
+    private Node<T> getNode(int index, int indexBegin, Node<T> begin) {
+        Node<T> current = begin;
+        for (int currentIndex = indexBegin; currentIndex < index; currentIndex++)
+            current = current.next;
+        for (int currentIndex = indexBegin; currentIndex > index; currentIndex--)
+            current = current.previous;
         return current;
     }
 
