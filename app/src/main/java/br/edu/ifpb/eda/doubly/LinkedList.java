@@ -30,20 +30,19 @@ public class LinkedList<T> implements ILinkedList<T> {
         this.size = 0;
     }
 
-    private Node<T> getNode(int index) {
-        Node<T> current;
-
-        if (index < (size >> 1)) {
-            current = this.head;
-            for (int count = 0; count < index; count++)
-                current = current.next;
-        } else {
-            current = this.tail;
-            for (int count = size; count > index + 1; count--)
-                current = current.previous;
-        }
-
+    private Node<T> getNode(int index, int beginIndex, Node<T> begin) {
+        Node<T> current = begin;
+        for (int currentIndex = beginIndex; currentIndex < index; currentIndex++)
+            current = current.next;
+        for (int currentIndex = beginIndex; currentIndex > index; currentIndex--)
+            current = current.previous;
         return current;
+    }
+
+    private Node<T> getNode(int index) {
+        if (index < (size >> 1))
+            return getNode(index, 0, this.head);
+        return getNode(index, size - 1, this.tail);
     }
 
     @Override
