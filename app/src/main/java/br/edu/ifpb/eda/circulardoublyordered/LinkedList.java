@@ -18,14 +18,12 @@ public class LinkedList<T extends Comparable<T>> {
         return current;
     }
 
-    private Node<T> getNode(int index, int beginIndex) {
-        return getNode(index, beginIndex, beginIndex < index ? root.next : root.previous);
-    }
-
     private Node<T> getNode(int index) {
         if (index < 0 || index >= size)
             return null;
-        return getNode(index, index < (size >> 1) ? 0 : size);
+        if (index < (size >> 1))
+            return getNode(index, 0, root.next);
+        return getNode(index, size - 1, root.previous);
     }
 
     public boolean isEmpty() {
